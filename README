@@ -1,0 +1,11 @@
+# Introduction
+visualRDF aims to provide a nice graphical visualization of an RDF graph.
+
+visualRDF is a one night-fork from visualSPARQL (see my profile for that). It will probably stay in this status for a while.
+
+visualRDF uses d3.js[1] for rendering and ARC2[2] for parsing RDF.
+
+If you have any comments, bug reports, etc. Please create an issue on github.
+
+[1] http://mbostock.github.com/d3/
+[2] https://github.com/semsol/arc2
