@@ -1,0 +1,16 @@
+body {
+  font: 14px Helvetica Neue;
+  text-rendering: optimizeLegibility;
+  margin-top: 1em;
+  overflow-y: scroll;
+  font-weight: 300;
+}
+h1 {
+  font-size: 36px;
+  margin-bottom: .3em;
+  font-weight: 300;
+
+}
+.details{
+  font-size: 16px;
+}
