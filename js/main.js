@@ -44,6 +44,14 @@ var force;
       .attr("y", function(d) { return d.source.y; })
       .text(function(d){return d.name;});
       
+      //Adding circles to represent direction
+      link.append("svg:circle")
+      .attr("class", "link")
+      .attr("cx", function(d) { return d.target.x; })
+      .attr("cy", function(d) { return d.target.y; })
+      .attr("r", 2).style("fill", "#000").style("stroke", "#000")
+      .text(function(d){return d.name;});
+      
 
       var node = vis.selectAll("g.node")
       .data(nodes)
@@ -77,7 +85,9 @@ var force;
           .attr("x2", function(d) { return d.target.x; })
           .attr("y2", function(d) { return d.target.y; });
           link.selectAll("text.link").attr("x", function(d) { return (d.source.x+d.target.x)/2; })
-          .attr("y", function(d) { return (d.source.y+d.target.y)/2; })
+          .attr("y", function(d) { return (d.source.y+d.target.y)/2; });
+          link.selectAll("circle.link").attr("cx", function(d) { return (0.1*d.source.x+0.9*d.target.x); })
+          .attr("cy", function(d) { return (0.1*d.source.y+0.9*d.target.y); });
           
           node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; 
           });                    

@@ -10,8 +10,6 @@ if(isset($_GET['url'])){
 <script type="text/javascript" src="js/d3/d3.js"></script>
 <script type="text/javascript" src="js/d3/d3.layout.js"></script>
 <script type="text/javascript" src="js/d3/d3.geom.js"></script>
-
-<script type="text/javascript" src="js/namespace.js"></script>
 <script type="text/javascript">
 var url = '<?=$url?>';
 </script>
