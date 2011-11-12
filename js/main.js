@@ -61,7 +61,7 @@ var force;
       .attr("dy", "80px")
       .call(force.drag);
       
-      node.append("svg:circle")
+      node.filter(function(d){return d.type == "bnode" || d.type == "uri"}).append("svg:circle")
       .attr("class", "node")
       .attr("r", 10)
       .attr("x", "-8px")
@@ -71,13 +71,39 @@ var force;
       .style("fill", "#CFEFCF")
       .style("stroke", "#000");
       
-     
+
+
+      node.filter(function(d){return d.type == "literal"}).append("svg:rect")
+      .attr("class", "node")
+      .attr("x", "-4px")
+      .attr("y", "-8px")
+      .attr("width", "60px")
+      .attr("height", "16px")
+      .style("fill", "#CFEFCF")
+      .style("stroke", "#000");
       
-      node.append("svg:text")
+      node.filter(function(d){return d.type == "bnode" || d.type == "uri"}).append("svg:text")
       .attr("class", "nodetext")
       .attr("dx", 12)
       .attr("dy", ".35em")
       .text(function(d) { return d.name });
+      
+      
+      node.filter(function(d){return d.type == "literal"}).append("svg:text")
+      .attr("class", "literal")
+      .attr("dx", 0)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name });
+      
+      arr1 = d3.selectAll("text.literal");
+      arr = arr1[0];
+      for(var i=0; i<arr.length; i++){
+      	x = arr[i].previousSibling;
+      	d3.select(x).attr("width", arr[i].clientWidth+8);
+      	console.log(arr[i].clientWidth);
+      }
+      
+      
       
       force.on("tick", function() {
       	  link.selectAll("line.link").attr("x1", function(d) { return d.source.x; })

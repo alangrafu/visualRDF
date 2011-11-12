@@ -27,11 +27,11 @@ if(isset($_GET['url'])){
   foreach($triples as $t){
   	if(!isset($nodes[$t['s']])){
   	  $nodes[$t['s']] = $c++;
-  	  $results['nodes'][] = array("name" => uri2curie($t['s']), "uri" => $t['s']);
+  	  $results['nodes'][] = array("name" => uri2curie($t['s']), "uri" => $t['s'], "type" => $t['s_type']);
   	}
   	if(!isset($nodes[$t['o']])){
   	  $nodes[$t['o']] = $c++;
-  	  $results['nodes'][] = array("name" => uri2curie($t['o']), "uri" => $t['o']);
+  	  $results['nodes'][] = array("name" => uri2curie($t['o']), "uri" => $t['o'], "type" => $t['o_type']);
   	}
   }
   $results['links'] = array(); 
