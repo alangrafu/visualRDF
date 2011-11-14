@@ -11,9 +11,31 @@ h1 {
   font-weight: 300;
 
 }
+.link { 
+	stroke: #ccc; 
+	  font-weight: 300;
+
+	font-size: 11px; 
+	font-family: sans-serif; 
+}
+.nodetext { 
+	pointer-events: none; 
+	font-size: 11px; 
+	font-family: sans-serif; 
+}
+.main{
+	border: 1px; 
+	border-color: black
+}
 .details{
   font-size: 16px;
 }
 .literal{
   font-size: 11px;
+}
+text.link{
+  stroke: black;
+  pointer-events: none; 
+  font-size: 11px; 
+  font-family: sans-serif; 
 }

@@ -8,7 +8,7 @@ var vis = d3.select("#chart").append("svg:svg")
 
 var files = d3.select("body").append("div").style("width", 100).style("height", 100).style("border-style", "solid").style("border-width", "1px").style("float", "left");
 
-
+var preds=true;
 var nodes = [];
 var links = [];
 var force;
@@ -120,6 +120,15 @@ var force;
       });
 }
 
+d3.select("#properties").on('click', function(){
+	if(preds){
+	  d3.selectAll("text.link").style("display", "none")	;
+	  preds = false;
+	}else{
+	  d3.selectAll("text.link").style("display", "inline")	;
+	  preds = true;
+	}	  
+});
 
 function restart(){
   d3.json('rdf2json.php?url='+encodeURIComponent(url), function(json){

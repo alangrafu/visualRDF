@@ -13,22 +13,16 @@ if(isset($_GET['url'])){
 <script type="text/javascript">
 var url = '<?=$url?>';
 </script>
-
-<style type="text/css">
-.link { stroke: #ccc; font-size: 11px; font-family: sans-serif; }
-.nodetext { pointer-events: none; font-size: 11px; font-family: sans-serif; }
-.main{border: 1px; border-color: black}
-</style>
 <link href='css/style.css' rel='stylesheet' type='text/css' />
 <title>Visual RDF</title>
 </head>
 <body>
-<h1>Visual RDF</h1>
+<h1><a href='.'>Visual RDF</a></h1>
 <div>
   <form method="get" action="">
     <input type='text' id='url' name='url' value='<?=$url?>' size='100'/>
     <input type="submit" value="Redraw"/>
-  </form><div id="msg">
+  </form><div id="msg"><input type="checkbox" id="properties"/><label>Hide/Show properties</label>
   <img id="waiting" src="img/waiting.gif"/>
 </div>
 </div>
