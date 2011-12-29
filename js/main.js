@@ -11,12 +11,35 @@ var files = d3.select("body").append("div").style("width", 100).style("height", 
 var preds=true;
 var nodes = [];
 var links = [];
+var linkedArrowhead = [];
 var force;
+
+function mergeGraphs(newNodes, newLinks){
+  console.log(links);
+  for(i in newLinks){
+  	sIdx = newLinks[i].source;
+  	tIdx = newLinks[i].target;
+  	
+  	if(nodes.indexOf(newNodes[sIdx]) == -1){
+  	  console.log("Adding "+newNodes[sIdx].uri+" to nodes")
+  	  nodes.push(newNodes[sIdx]);
+  	}
+  	newLinks[i].source = nodes.indexOf(newNodes[sIdx]);
+  	
+  	if(nodes.indexOf(newNodes[tIdx]) == -1){
+  	  console.log("Adding "+newNodes[tIdx].uri+" to nodes")
+  	  nodes.push(newNodes[tIdx]);
+  	}
+  	newLinks[i].target = nodes.indexOf(newNodes[tIdx]);
+	links.push(newLinks[i]);
+  }
+  console.log(links);
+
+}
 
     function init(json){
     force = self.force = d3.layout.force();
-      nodes = json.nodes;
-      links = json.links;
+    mergeGraphs(json.nodes, json.links);
       force.nodes(nodes)
       .links(links)
       .gravity(0.2)
@@ -44,15 +67,20 @@ var force;
       .attr("y", function(d) { return d.source.y; })
       .text(function(d){return d.name;});
       
-      //Adding circles to represent direction
-      link.append("svg:circle")
-      .attr("class", "link")
-      .attr("cx", function(d) { return d.target.x; })
-      .attr("cy", function(d) { return d.target.y; })
-      .attr("r", 2).style("fill", "#000").style("stroke", "#000")
-      .text(function(d){return d.name;});
+  
+  linkArrowhead = link.append("svg:polygon")
+  .attr("class", "arrowhead")
+  .attr("transform",function(d) {
+  	  angle = Math.atan2(d.target.y-d.source.y, d.target.x-d.source.x);
+  	  return "rotate("+angle+", "+d.target.x+", "+d.target.y+")";
+  })
+  .attr("points", function(d) {
+  	  //angle = (d.y2-d.y1)/(d.x2-d.x1);
+  	  return [[d.target.x,d.target.y].join(","),
+  	  	[d.target.x-3,d.target.y+26].join(","),
+  	  [d.target.x+3,d.target.y+26].join(",")].join(" ");
+  });
       
-
       var node = vis.selectAll("g.node")
       .data(nodes)
       .enter().append("svg:g")
@@ -100,7 +128,6 @@ var force;
       for(var i=0; i<arr.length; i++){
       	x = arr[i].previousSibling;
       	d3.select(x).attr("width", arr[i].clientWidth+8);
-      	console.log(arr[i].clientWidth);
       }
       
       
@@ -112,11 +139,23 @@ var force;
           .attr("y2", function(d) { return d.target.y; });
           link.selectAll("text.link").attr("x", function(d) { return (d.source.x+d.target.x)/2; })
           .attr("y", function(d) { return (d.source.y+d.target.y)/2; });
-          link.selectAll("circle.link").attr("cx", function(d) { return (0.1*d.source.x+0.9*d.target.x); })
-          .attr("cy", function(d) { return (0.1*d.source.y+0.9*d.target.y); });
           
           node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; 
-          });                    
+          });      
+          
+            	  linkArrowhead.attr("points", function(d) {
+  	  	  return [[d.target.x,d.target.y+10].join(","),
+  	  	  	[d.target.x-3,d.target.y+16].join(","),
+  	  	  [d.target.x+3,d.target.y+16].join(",")].join(" ");
+  	  })
+  	  .attr("transform",function(d) {
+  	  	  angle = Math.atan2(d.target.y-d.source.y, d.target.x-d.source.x)*180/Math.PI + 90;
+  	  	  return "rotate("+angle+", "+d.target.x+", "+d.target.y+")";
+  	  });
+      });
+      
+      node.filter(function(d){return d.type == "uri"}).on('click', function(d){
+      	  restart(d.uri);      	  
       });
 }
 
@@ -130,10 +169,10 @@ d3.select("#properties").on('click', function(){
 	}	  
 });
 
-function restart(){
-  d3.json('rdf2json.php?url='+encodeURIComponent(url), function(json){
+function restart(myUrl){
+  d3.json('rdf2json.php?url='+encodeURIComponent(myUrl), function(json){
   	  d3.select("#waiting").style("display", "none");
   	  init(json);
   });  
 }
-restart();
+restart(url);

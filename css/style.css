@@ -39,3 +39,8 @@ text.link{
   font-size: 11px; 
   font-family: sans-serif; 
 }
+arrowhead {
+  stroke: #999;
+  fill: #999;
+  stroke-width: 1;
+}
