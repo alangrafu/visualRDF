@@ -17,13 +17,15 @@ var url = '<?=$url?>';
 <title>Visual RDF</title>
 </head>
 <body>
-<h1><a href='.'>Visual RDF</a></h1>
 <div>
-  <form method="get" action="">
+<h1 style="display: inline"><a href='.'>Visual RDF</a></h1>
+  <div style="float:right">
+  <form method="get" action="" style='float:left'>
     <input type='text' id='url' name='url' value='<?=$url?>' size='100'/>
     <input type="submit" value="Redraw"/>
   </form><div id="msg"><input type="checkbox" id="properties"/><label>Hide/Show properties</label>
   <img id="waiting" src="img/waiting.gif"/>
+</div>
 </div>
 </div>
 <div style="float: left;border-width: 1px; border-style: solid;width:100%" id='chart'></div>

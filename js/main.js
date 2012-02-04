@@ -4,36 +4,47 @@ var w = document.getElementById("chart").offsetWidth,
 
 var vis = d3.select("#chart").append("svg:svg")
     .attr("width", w)
-    .attr("height", h);
+    .attr("height", h)
+    .attr("pointer-events", "all")
+    .append('svg:g')
+    .call(d3.behavior.zoom().on("zoom", redraw))
+    .append('svg:g');
+
+vis.append('svg:rect')
+    .attr('width', w)
+    .attr('height', h)
+    .attr('fill', 'white');
 
 var files = d3.select("body").append("div").style("width", 100).style("height", 100).style("border-style", "solid").style("border-width", "1px").style("float", "left");
 
-var preds=true;
+var preds=false;
 var nodes = [];
 var links = [];
 var linkedArrowhead = [];
 var force;
 
+function redraw() {
+  vis.attr("transform",
+      "translate(" + d3.event.translate + ")"
+      + " scale(" + d3.event.scale + ")");
+}
+
 function mergeGraphs(newNodes, newLinks){
-  console.log(links);
   for(i in newLinks){
   	sIdx = newLinks[i].source;
   	tIdx = newLinks[i].target;
   	
   	if(nodes.indexOf(newNodes[sIdx]) == -1){
-  	  console.log("Adding "+newNodes[sIdx].uri+" to nodes")
   	  nodes.push(newNodes[sIdx]);
   	}
   	newLinks[i].source = nodes.indexOf(newNodes[sIdx]);
   	
   	if(nodes.indexOf(newNodes[tIdx]) == -1){
-  	  console.log("Adding "+newNodes[tIdx].uri+" to nodes")
   	  nodes.push(newNodes[tIdx]);
   	}
   	newLinks[i].target = nodes.indexOf(newNodes[tIdx]);
 	links.push(newLinks[i]);
   }
-  console.log(links);
 
 }
 
@@ -65,7 +76,7 @@ function mergeGraphs(newNodes, newLinks){
       .attr("class", "link")
       .attr("x", function(d) { return d.source.x; })
       .attr("y", function(d) { return d.source.y; })
-      .text(function(d){return d.name;});
+      .text(function(d){return d.name;}).style("display", "none");
       
   
   linkArrowhead = link.append("svg:polygon")
@@ -113,9 +124,10 @@ function mergeGraphs(newNodes, newLinks){
       node.filter(function(d){return d.type == "bnode" || d.type == "uri"}).append("svg:text")
       .attr("class", "nodetext")
       .attr("dx", 12)
-      .attr("dy", ".35em")
+      .attr("dy", ".35em").attr("xlink:href", "http://graves.cl")
       .text(function(d) { return d.name });
       
+
       
       node.filter(function(d){return d.type == "literal"}).append("svg:text")
       .attr("class", "literal")
@@ -131,8 +143,17 @@ function mergeGraphs(newNodes, newLinks){
       }
       
       
-      
+      var ticks = 0;
       force.on("tick", function() {
+      	  ticks++;
+      	  if (ticks > 300) {
+                force.stop();
+                force.charge(0)
+                    .linkStrength(0)
+                    .linkDistance(0)
+                    .gravity(0);
+                force.start();
+            }
       	  link.selectAll("line.link").attr("x1", function(d) { return d.source.x; })
           .attr("y1", function(d) { return d.source.y; })
           .attr("x2", function(d) { return d.target.x; })
@@ -154,9 +175,9 @@ function mergeGraphs(newNodes, newLinks){
   	  });
       });
       
-      node.filter(function(d){return d.type == "uri"}).on('click', function(d){
+      /*node.filter(function(d){return d.type == "uri"}).on('click', function(d){
       	  restart(d.uri);      	  
-      });
+      });*/
 }
 
 d3.select("#properties").on('click', function(){
@@ -167,6 +188,9 @@ d3.select("#properties").on('click', function(){
 	  d3.selectAll("text.link").style("display", "inline")	;
 	  preds = true;
 	}	  
+});
+
+d3.select('circle').on('mouseover', function(){
 });
 
 function restart(myUrl){
