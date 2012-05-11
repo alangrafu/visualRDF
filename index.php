@@ -20,6 +20,7 @@ var url = '<?=$url?>';
 <div>
 <h1 style="display: inline"><a href='.'>Visual RDF</a></h1>
   <div style="float:right">
+<div><strong style="color: red">Usage: </strong> <strong>Scroll</strong> ↦ Zoom. <strong>Drag node</strong> ↦ Move node. <strong>Drag background</strong> ↦ Move graph.</div>
   <form method="get" action="" style='float:left'>
     <input type='text' id='url' name='url' value='<?=$url?>' size='100'/>
     <input type="submit" value="Redraw"/>
