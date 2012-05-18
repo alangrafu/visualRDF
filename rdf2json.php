@@ -36,7 +36,9 @@ if(isset($_GET['url'])){
   }
   $results['links'] = array(); 
   foreach($triples as $t){
+//    if(uri2curie($t['p']) !=  "rdf:type"){
   	$results['links'][] = array("source" => $nodes[$t['s']], "target" => $nodes[$t['o']], "name" => uri2curie($t['p']), "value" => 10);
+//    }
   }
   echo json_encode($results);
 }else{

@@ -19,12 +19,16 @@ var url = '<?=$url?>';
 <body>
 <div>
 <h1 style="display: inline"><a href='.'>Visual RDF</a></h1>
+<p style="display:inline; position:absolute"><small><a href='https://github.com/alangrafu/visualRDF'>Github Repository</a></small></p>
   <div style="float:right">
 <div><strong style="color: red">Usage: </strong> <strong>Scroll</strong> ↦ Zoom. <strong>Drag node</strong> ↦ Move node. <strong>Drag background</strong> ↦ Move graph.</div>
   <form method="get" action="" style='float:left'>
     <input type='text' id='url' name='url' value='<?=$url?>' size='100'/>
     <input type="submit" value="Redraw"/>
-  </form><div id="msg"><input type="checkbox" id="properties"/><label>Hide/Show properties</label>
+  </form><div id="msg"><input type="checkbox" id="properties"/><label>Show properties</label>
+  <div style="display:inline"><input type="checkbox" id="hidePredicates"/><label>Hide predicates</label>
+                       <div id="preds" style="border: 1px solid black; position:absolute; display:none; color: white; background: rgba(0, 0, 0, 0.6);;"></div>
+</div>
   <img id="waiting" src="img/waiting.gif"/>
 </div>
 </div>

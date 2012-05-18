@@ -18,16 +18,18 @@ vis.append('svg:rect')
 var files = d3.select("body").append("div").style("width", 100).style("height", 100).style("border-style", "solid").style("border-width", "1px").style("float", "left");
 
 var preds=false;
+var types=true;
 var nodes = [];
 var links = [];
 var linkedArrowhead = [];
 var force;
-
+var uniquePredicates = {};
 function redraw() {
   vis.attr("transform",
       "translate(" + d3.event.translate + ")"
       + " scale(" + d3.event.scale + ")");
 }
+
 
 function mergeGraphs(newNodes, newLinks){
   for(i in newLinks){
@@ -48,7 +50,20 @@ function mergeGraphs(newNodes, newLinks){
 
 }
 
+function createPredicateFilters(up){
+  //d3.select("#preds").append("div").attr("class", "filter")
+  //                     .html("<input type='checkbox' id='all' class='all'/><label for='all'>All Predicates</label>");
+  for(i in up){
+    d3.select("#preds").append("div").attr("class", "filter")
+                       .html("<input type='checkbox' id='"+i+"' class='pred-filter'/><label for='"+i+"'>"+i+"</label>");
+  }
+  updateFilters();
+}
     function init(json){
+      for(i in json.links){
+        uniquePredicates[json.links[i].name] = 1;
+      }
+      createPredicateFilters(uniquePredicates);
     force = self.force = d3.layout.force();
     mergeGraphs(json.nodes, json.links);
       force.nodes(nodes)
@@ -63,7 +78,7 @@ function mergeGraphs(newNodes, newLinks){
       var link = vis.selectAll("g.link")
       .data(links)
       .enter()
-      .append("svg:g").attr("class", "link")
+      .append("svg:g").attr("class", "link").attr("class", function(d){return d.name})
       .call(force.drag);
       link.append("svg:line")
       .attr("class", "link")
@@ -78,7 +93,7 @@ function mergeGraphs(newNodes, newLinks){
       .attr("y", function(d) { return d.source.y; })
       .text(function(d){return d.name;}).style("display", "none");
       
-  
+
   linkArrowhead = link.append("svg:polygon")
   .attr("class", "arrowhead")
   .attr("transform",function(d) {
@@ -94,13 +109,14 @@ function mergeGraphs(newNodes, newLinks){
       
       var node = vis.selectAll("g.node")
       .data(nodes)
-      .enter().append("svg:g")
+      .enter().append("svg:g") 
       .attr("class", "node")
       .attr("dx", "80px")
       .attr("dy", "80px")
       .call(force.drag);
       
-      node.filter(function(d){return d.type == "bnode" || d.type == "uri"}).append("svg:circle")
+      node.filter(function(d){return d.type == "bnode" || d.type == "uri"}).append("svg:a") 
+      .attr("xlink:href", function(d){return "index.php?url="+d.uri} ).append("svg:circle")
       .attr("class", "node")
       .attr("r", 10)
       .attr("x", "-8px")
@@ -180,16 +196,6 @@ function mergeGraphs(newNodes, newLinks){
       });*/
 }
 
-d3.select("#properties").on('click', function(){
-	if(preds){
-	  d3.selectAll("text.link").style("display", "none")	;
-	  preds = false;
-	}else{
-	  d3.selectAll("text.link").style("display", "inline")	;
-	  preds = true;
-	}	  
-});
-
 d3.select('circle').on('mouseover', function(){
 });
 
@@ -199,4 +205,40 @@ function restart(myUrl){
   	  init(json);
   });  
 }
+
+
+d3.select("#properties").on('click', function(){
+	if(preds){
+	  d3.selectAll("text.link").style("display", "none")	;
+	  preds = false;
+	}else{
+	  d3.selectAll("text.link").style("display", "inline")	;
+	  preds = true;
+	}	  
+});
+d3.select("#hidePredicates").on('click', function(){
+    var menu = d3.select("#preds");
+    if(menu.style("display") == "none"){
+      menu.style("display", "inline")	;
+	  }else{
+	    menu.style("display",  "none")
+	  }
+});
+function updateFilters(){
+ 
+  
+  d3.selectAll(".pred-filter").on('change', function(){
+      predType = d3.select(this).attr("id").replace(":", "\\:");
+      var l = d3.selectAll("g."+predType);
+      if(uniquePredicates[predType] == 1){
+        d3.selectAll("g."+predType).style("display", "inline")	;
+        uniquePredicates[predType] = 0;
+      }else{
+        d3.selectAll("g."+predType).style("display", "none")	;	  
+        uniquePredicates[predType] = 1;
+      }
+  });
+}
+
+
 restart(url);

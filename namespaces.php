@@ -663,4 +663,5 @@ $ns["mygrid"]		=	"http://www.mygrid.org.uk/ontology#";
 $ns["visko"]		=	"http://trust.utep.edu/visko/ontology/visko-operator-v3.owl#";
 $ns["geovocab"]		=	"http://geovocab.org/";
 $ns["lda"]		=	"http://lodspeakr.org/lda/";
+$ns["poder"]		=	"http://poderopedia.com/vocab/";
 ?>
