@@ -31,14 +31,24 @@ xmlns:dc="http://purl.org/dc/elements/1.1/">
 <meta rel="dc:source" href="http://github.com/alangrafu/visualRDF" /> 
 <meta property="dc:modified" content="2012-05-18" /> 
 <meta charset='utf-8'> 
-<script type="text/javascript" src="js/d3/d3.js"></script>
-<script type="text/javascript" src="js/d3/d3.layout.js"></script>
-<script type="text/javascript" src="js/d3/d3.geom.js"></script>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/VivaGraphJS/dist/vivagraph.js"></script>
 <script type="text/javascript">
 var url = '<?=$url?>';
 </script>
-<link href='css/style.css' rel='stylesheet' type='text/css' />
-<title>Visual RDF</title>
+        <style type='text/css'>
+            .node {
+                background-color: #00a2e8;
+                width: 10px;
+                height: 10px;
+                position: absolute;
+            }
+            .link {
+                background-color: #dddddd;
+                position: absolute;
+            }
+            
+ </style><title>Visual RDF</title>
 </head>
 <body>
 <div>
@@ -57,8 +67,9 @@ var url = '<?=$url?>';
 </div>
 </div>
 </div>
-<div style="float: left;border-width: 1px; border-style: solid;width:100%" id='chart'></div>
-<script type="text/javascript" src='js/main.js'>
+<div style="float: left;border-width: 1px; border-style: solid;width:100%; height:400px" id='chart'>
+</div>
+<script type="text/javascript" src='js/vivamain.js'>
 </script>
 </body>
 </html>
