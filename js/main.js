@@ -1,6 +1,6 @@
 
 var w = document.getElementById("chart").offsetWidth,
-    h = 600
+    h = document.getElementById("chart").offsetHeight;
 
 var vis = d3.select("#chart").append("svg:svg")
     .attr("width", w)
