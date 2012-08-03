@@ -52,7 +52,7 @@ var url = '<?=$url?>';
  </div>
  <div style="float:left;width:100%; height:100%;min-height:400px;border:solid 1px black" id='chart'></div>
  <div style="font-size:70%;float:right">
-  <a href='./?url=<?=$url?>' target="_new">visualRdf</a>
+  <a href='./?url=<?=$url?>' target="_new">See this in visualRdf</a>
  </div>
  <script type="text/javascript" src='js/main.js'></script>
 </body>
