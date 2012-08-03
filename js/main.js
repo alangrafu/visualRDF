@@ -114,8 +114,8 @@ function createPredicateFilters(up){
       .attr("dy", "80px")
       .call(force.drag);
       
-      node.filter(function(d){return d.type == "bnode" || d.type == "uri"}).append("svg:a") 
-      .attr("xlink:href", function(d){return "?url="+d.uri} ).attr("target", "_new").append("svg:circle")
+      node.filter(function(d){return d.type == "uri"}).append("svg:a") 
+      .attr("xlink:href", function(d){return "./?url="+d.uri} ).attr("target", "_new").append("svg:circle")
       .attr("class", "node")
       .attr("r", 10)
       .attr("x", "-8px")
