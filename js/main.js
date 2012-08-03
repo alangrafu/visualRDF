@@ -116,7 +116,7 @@ function createPredicateFilters(up){
       .call(force.drag);
       
       node.filter(function(d){return d.type == "bnode" || d.type == "uri"}).append("svg:a") 
-      .attr("xlink:href", function(d){return "index.php?url="+d.uri} ).append("svg:circle")
+      .attr("xlink:href", function(d){return "index.php?url="+d.uri} ).attr("target", "_new").append("svg:circle")
       .attr("class", "node")
       .attr("r", 10)
       .attr("x", "-8px")
@@ -140,7 +140,7 @@ function createPredicateFilters(up){
       node.filter(function(d){return d.type == "bnode" || d.type == "uri"}).append("svg:text")
       .attr("class", "nodetext")
       .attr("dx", 12)
-      .attr("dy", ".35em").attr("xlink:href", "http://graves.cl")
+      .attr("dy", ".35em").attr("xlink:href", "http://graves.cl").attr("target", "_new")
       .text(function(d) { return d.name });
       
 
