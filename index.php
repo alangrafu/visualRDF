@@ -2,6 +2,10 @@
 $url = get_current_url();//"about.ttl";
 if(isset($_GET['url'])){
   $url = $_GET['url'];
+}else{
+  $indexless = str_replace("index.php", "", $url);
+  header("Location: $indexless?url=$indexless");
+  
 }
 
 
@@ -94,8 +98,8 @@ var url = '<?=$url?>',
 <script type="text/javascript">
 //Embed dialog
 $("#dialogButton").on('click', function(){
-  var newUrl = thisUrl.replace(/\/\?/, "/embed.php?");
-  $("#embedableCode").text("<iframe frameborder='0' width='100%' height='99%' src='"+newUrl+"'></iframe>")
+  var newUrl = thisUrl.replace("index.php?url", "?url").replace(/\/\?/, "/embed.php?");
+  $("#embedableCode").text("<div style='width:600px;height:460px'><iframe frameborder='0' width='100%' height='99%' src='"+newUrl+"'></iframe></div>")
   $("#embedDialog").show();
 });
 $(".close").on('click', function(){

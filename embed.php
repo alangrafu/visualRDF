@@ -51,7 +51,7 @@ var url = '<?=$url?>';
    <img id="waiting" alt="waiting icon" src="img/waiting.gif"/>
  </div>
  <div style="float:left;width:100%; height:100%;min-height:400px;border:solid 1px black" id='chart'></div>
- <div style="font-size:70%">
+ <div style="font-size:70%;float:right">
   <a href='./?url=<?=$url?>' target="_new">visualRdf</a>
  </div>
  <script type="text/javascript" src='js/main.js'></script>
