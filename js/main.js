@@ -1,5 +1,5 @@
 
-var w = document.getElementById("chart").offsetWidth,
+var w = document.getElementById("chart").offsetWidth-2,
     h = document.getElementById("chart").offsetHeight;
 
 var vis = d3.select("#chart").append("svg:svg")
@@ -15,7 +15,6 @@ vis.append('svg:rect')
     .attr('height', h)
     .attr('fill', 'white');
 
-var files = d3.select("body").append("div").style("width", 100).style("height", 100).style("border-style", "solid").style("border-width", "1px").style("float", "left");
 
 var preds=false;
 var types=true;

@@ -50,7 +50,10 @@ var url = '<?=$url?>';
     <div id="preds" style="border: 1px solid black; position:absolute; display:none; color: white; background: rgba(0, 0, 0, 0.6);;"></div>
    <img id="waiting" alt="waiting icon" src="img/waiting.gif"/>
  </div>
- <div style="float:left;width:100%; height:100%;min-height:400px" id='chart'></div>
+ <div style="float:left;width:100%; height:100%;min-height:400px;border:solid 1px black" id='chart'></div>
+ <div style="font-size:70%">
+  <a href='./?url=<?=$url?>' target="_new">visualRdf</a>
+ </div>
  <script type="text/javascript" src='js/main.js'></script>
 </body>
 </html>
