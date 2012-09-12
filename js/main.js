@@ -154,7 +154,7 @@ function createPredicateFilters(up){
       arr = arr1[0];
       for(var i=0; i<arr.length; i++){
       	x = arr[i].previousSibling;
-      	d3.select(x).attr("width", arr[i].clientWidth+8);
+      	d3.select(x).attr("width", arr[i].getBBox().width+8);
       }
       
       
