@@ -39,7 +39,7 @@ if(isset($_GET['url'])){
   $parsers[1]['parser']  = ARC2::getRDFXMLParser();
   $parsers[2]['formats'] = array('application/json', 'application/x-javascript', 'text/javascript', 'text/x-javascript', 'text/x-json');
   $parsers[2]['parser']  = ARC2::getJSONParser();
-  foreach($pasers as $v){
+  foreach($parsers as $v){
     if(in_array($content_type, $v['formats'])){
       $parser = $v['parser'];
     }
