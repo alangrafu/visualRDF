@@ -99,7 +99,7 @@ var url = '<?=$url?>',
 //Embed dialog
 $("#dialogButton").on('click', function(){
   var newUrl = thisUrl.replace("index.php?url", "?url").replace(/\/\?/, "/embed.php?");
-  $("#embedableCode").text("<div style='width:600px;height:460px'><iframe frameborder='0' width='100%' height='99%' src='"+newUrl+"'></iframe></div>")
+  $("#embedableCode").text("<div style='width:600px;height:460px'><iframe style='overflow-x: hidden;overflow-y: hidden;' frameborder='0'  width='100%' height='99%' src='"+newUrl+"'></iframe></div>")
   $("#embedDialog").show();
 });
 $(".close").on('click', function(){
