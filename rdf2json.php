@@ -49,11 +49,12 @@ if(isset($_GET['url'])){
   
   //end of workaround
   
-  $parser->parse('http://example.com', $data); //Since IDK which namespace the documents contains, lets use example.org
+  $parser->parse('http://example.org', $data); //Since IDK which namespace the documents contains, lets use example.org
   $triples = $parser->getTriples();
   $first=true;
   $c = 0;
   $nodes = array();
+  $preds = array();
   $results['nodes'] = array();
   foreach($triples as $t){
   	if(!isset($nodes[$t['s']])){
@@ -64,11 +65,17 @@ if(isset($_GET['url'])){
   	  $nodes[$t['o']] = $c++;
   	  $results['nodes'][] = array("name" => uri2curie($t['o']), "uri" => $t['o'], "type" => $t['o_type']);
   	}
+  	if(!isset($preds[uri2curie($t['s'])." ".uri2curie($t['o'])])){
+  	  $preds[uri2curie($t['s'])." ".uri2curie($t['o'])] = uri2curie($t['p']);
+  	}else{
+  	  $preds[uri2curie($t['s'])." ".uri2curie($t['o'])] .= " ".uri2curie($t['p']);
+  	}
+  	
   }
   $results['links'] = array(); 
   foreach($triples as $t){
 //    if(uri2curie($t['p']) !=  "rdf:type"){
-  	$results['links'][] = array("source" => $nodes[$t['s']], "target" => $nodes[$t['o']], "name" => uri2curie($t['p']), "value" => 10);
+  	$results['links'][] = array("source" => $nodes[$t['s']], "target" => $nodes[$t['o']], "name" => $preds[uri2curie($t['s'])." ".uri2curie($t['o'])], "value" => 10);
 //    }
   }
   echo json_encode($results);
