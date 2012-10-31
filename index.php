@@ -54,7 +54,7 @@ var url = '<?=$url?>',
 <div class="container-fluid">
  <div class="row-fluid">
   <div class="span2"><h1 style="display: inline"><a href='.'>Visual RDF</a></h1></div>
-  <div class="span2"><a href='https://github.com/alangrafu/visualRDF' target="_new"><img alt="github icon" src='https://github.com/favicon.png'/></a></div>
+  <div class="span2"><a href='https://github.com/alangrafu/visualRDF' target="_new"><img alt="github icon" src='img/github.ico'/></a></div>
   <div class="span2"><span id="dialogButton" style="text-decoration:none;vertical-align:middle;font-weight:bold;font-size:200%;font-family:courier;color:black;cursor: hand; cursor: pointer;">&lt;/&gt;</span></div>
   <div class="span6">
    <strong style="color: red">Usage: </strong> <strong>Scroll</strong> &#8594; Zoom. <strong>Drag node</strong> &#8594; Move node. <strong>Drag background</strong> &#8594; Move graph.
