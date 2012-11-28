@@ -49,7 +49,7 @@ if(isset($_GET['url'])){
   
   //end of workaround
   
-  $parser->parse('http://example.org', $data); //Since IDK which namespace the documents contains, lets use example.org
+  $parser->parse($u, $data); //Since IDK which namespace the documents contains, lets use the uri requested
   $triples = $parser->getTriples();
   $first=true;
   $c = 0;
