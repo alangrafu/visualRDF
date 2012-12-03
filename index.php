@@ -35,7 +35,6 @@ xmlns:dc="http://purl.org/dc/elements/1.1/">
 <meta rel="dc:source" href="http://github.com/alangrafu/visualRDF" /> 
 <meta property="dc:modified" content="2012-05-18" /> 
 <meta charset='utf-8'> 
-<link href='css/style.css' rel='stylesheet' type='text/css' />
 <link href='css/bootstrap-responsive.min.css' rel='stylesheet' type='text/css' />
 <link href='css/bootstrap.min.css' rel='stylesheet' type='text/css' />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>

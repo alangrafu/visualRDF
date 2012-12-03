@@ -81,6 +81,7 @@ function createPredicateFilters(up){
       .call(force.drag);
       link.append("svg:line")
       .attr("class", "link")
+      .attr("stroke", "gray")
       .attr("x1", function(d){return d.x1})
       .attr("y1", function(d){return d.y1})
       .attr("x2", function(d){return d.x1})
