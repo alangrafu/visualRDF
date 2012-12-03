@@ -32,7 +32,7 @@ xmlns:dc="http://purl.org/dc/elements/1.1/">
 <meta property="dc:modified" content="2012-05-18" /> 
 <meta charset='utf-8'> 
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/VivaGraphJS/dist/vivagraph.js"></script>
+<script type="text/javascript" src="js/vivagraph.js"></script>
 <script type="text/javascript">
 var url = '<?=$url?>';
 </script>
@@ -46,6 +46,10 @@ var url = '<?=$url?>';
             .link {
                 background-color: #dddddd;
                 position: absolute;
+            }
+            .nodetext{
+                font-family: sans-serif;
+                font-size: 10px;
             }
             
  </style><title>Visual RDF</title>
