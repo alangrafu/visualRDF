@@ -31,6 +31,8 @@ xmlns:dc="http://purl.org/dc/elements/1.1/">
 <meta rel="dc:source" href="http://github.com/alangrafu/visualRDF" /> 
 <meta property="dc:modified" content="2012-05-18" /> 
 <meta charset='utf-8'> 
+<link href='css/bootstrap-responsive.min.css' rel='stylesheet' type='text/css' />
+<link href='css/bootstrap.min.css' rel='stylesheet' type='text/css' />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/vivagraph.js"></script>
 <script type="text/javascript">
