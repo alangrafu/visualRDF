@@ -48,6 +48,13 @@ var url = '<?=$url?>',
     thisUrl = document.URL;
 </script>
 <title>Visual RDF</title>
+<style>
+.control_button{
+  fill: #357ebd;
+  stroke: #428bca;
+  border-radius: 4px;
+}
+</style>
 </head>
 <body>
 <div class="container-fluid">
@@ -105,6 +112,19 @@ $(".close").on('click', function(){
   $("#embedDialog").hide();
 });
 </script>
+<div style="border: 1px solid black; background: white;display:none;position: absolute;" id="literals">
+  <h3 style="padding:5px;" id="literalsubject"></h3>
+  <div style="padding:5px;" id="literalmsg"></div>
+  <table class="table table-hover" id="literaltable">
+    <thead>
+      <tr>
+        <th>Property</th><th>Value</th>
+      </tr>
+    </thead>
+    <tbody id="literalbody">
+    </tbody>
+  </table>
+</div>
 </body>
 </html>
 
