@@ -204,7 +204,10 @@ function init(json){
 				d3.select("#literaltable").style("display", "block");
 				d3.select("#literalmsg").html("")
 				$.each(currentLiterals, function(i, item){
-					tablebody.append($("<tr><td>"+item['p']+"</td><td>"+item['o']+"</td></tr>"))
+					language = (item['l'] == "")?"":" <strong>("+item['l']+")</strong>";
+					datatype = (item['d'] == "")?"":"^^<strong>"+item['d']+"</strong>";
+					td = "<tr><td>"+item['p']+"</td><td>"+item['o']+datatype+language+"</td></tr>"
+					tablebody.append($(td))
 				})
 			}else{
 				d3.select("#literaltable").style("display", "none");

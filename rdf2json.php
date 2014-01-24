@@ -64,7 +64,7 @@ if(isset($_GET['url'])){
 		 $results['nodes'][] = array("name" => $s, "uri" => $t['s'], "type" => $t['s_type']);
 		}
 		if($t['o_type'] == 'literal'){
-			$literals[$s][] = array("p" => uri2curie($t['p']), "o" => $t['o'], "l" => $t['o_lang']);
+			$literals[$s][] = array("p" => uri2curie($t['p']), "o" => $t['o'], "l" => $t['o_lang'], "d" => $t['o_datatype']);
 		}else{
 			if(!isset($nodes[$t['o']])){
 				$nodes[$t['o']] = $c++;
