@@ -25,7 +25,7 @@ if(isset($_GET['url'])){
 	curl_setopt($ch, CURLOPT_URL, $u);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-	curl_setopt($ch,CURLOPT_HTTPHEADER,array ("Accept: text/turtle,text/n3q;0.9,application/turtle;q=0.8,application/rdf+xml;q=0.6,application/json;q=0.4,*/*"));
+	curl_setopt($ch, CURLOPT_HTTPHEADER,array ("Accept: text/turtle, text/n3; q=0.9, application/turtle; q=0.8, application/rdf+xml; q=0.6, application/json; q=0.4, */*; q=0.1"));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	$data = curl_exec($ch);
 	$content_type = array_shift(explode(";", curl_getinfo($ch, CURLINFO_CONTENT_TYPE)));
@@ -48,7 +48,6 @@ if(isset($_GET['url'])){
 	$parser = ARC2::getRDFParser();
 
 	//end of workaround
-
 	$parser->parse($u, $data); //Since IDK which namespace the documents contains, lets use the uri requested
 	$triples = $parser->getTriples();
 	$first=true;
