@@ -28,7 +28,9 @@ if(isset($_GET['url'])){
 	curl_setopt($ch, CURLOPT_HTTPHEADER,array ("Accept: text/turtle, text/n3; q=0.9, application/turtle; q=0.8, application/n-triples; q=0.7, application/rdf+xml; q=0.6, application/json; q=0.4, */*; q=0.1"));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	$data = curl_exec($ch);
-	$content_type = array_shift(explode(";", curl_getinfo($ch, CURLINFO_CONTENT_TYPE)));
+	$_aux = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+	$_aux2 = explode(";", $_aux);
+	$content_type = array_shift($_aux2);
 	curl_close($ch);
 	$parser = NULL;
 
